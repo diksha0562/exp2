@@ -1,0 +1,34 @@
+var index = localStorage.getItem('item');
+
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function () {
+    8plolif (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+
+        document.getElementById("descriptionForAll").innerHTML = "<h3 id='subheading'>" + myObj.name[index] + "</h3>" + "<div class='mainDescription'>" + "<img src=" + myObj.imagesrc[index] + " class='imageDescription' alt='T-Shirt' >" + "<p class='description'>" + "Product ID:" + myObj.productID[index] + "<br>" + "Name: " + myObj.name[index] + "<br>" + "Price:" + myObj.price[index] + "<br>" + "<button onclick=\"addToCart(" + myObj.productID[index] + ")\" >Add To Cart </button>" + "</p></div>";
+
+    }
+};
+xmlhttp.open("GET", "https://raw.githubusercontent.com/SaloniTomar/Shopping-Cart/master/product.json", true);
+xmlhttp.send();
+
+
+function addToCart(productId) {
+
+    var addedItems = localStorage.getItem('addedToCart');
+    if (addedItems) {
+        localStorage.setItem('addedToCart', addedItems + ',' + productId);
+    } else {
+        localStorage.setItem('addedToCart', productId);
+    }
+
+
+    /*if (localStorage.cart === undefined) {
+        localStorage.cart = index;
+        alert(localStorage.cart.length);
+    } else {
+        localStorage.cart += "," + index;
+        alert(localStorage.cart.length);
+    }*/
+
+}
